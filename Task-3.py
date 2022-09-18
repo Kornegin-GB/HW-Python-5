@@ -37,22 +37,30 @@ def Creating_field(lst):
 def Checking_winner(lst, plyer):
     if (lst[0][0] == "-X-" and lst[0][1] == "-X-" and lst[0][2] == "-X-") or (lst[0][0] == "-O-" and lst[0][1] == "-O-" and lst[0][2] == "-O-"):
         print(f"\nПобедитель {plyer}\n")
+        return False
     elif (lst[1][0] == "-X-" and lst[1][1] == "-X-" and lst[1][2] == "-X-") or (lst[1][0] == "-O-" and lst[1][1] == "-O-" and lst[1][2] == "-O-"):
         print(f"\nПобедитель {plyer}\n")
+        return False
     elif (lst[2][0] == "-X-" and lst[2][1] == "-X-" and lst[2][2] == "-X-") or (lst[2][0] == "-O-" and lst[2][1] == "-O-" and lst[2][2] == "-O-"):
         print(f"\nПобедитель {plyer}\n")
+        return False
 
     elif (lst[0][0] == "-X-" and lst[1][0] == "-X-" and lst[2][0] == "-X-") or (lst[0][0] == "-O-" and lst[1][0] == "-O-" and lst[2][0] == "-O-"):
         print(f"\nПобедитель {plyer}\n")
+        return False
     elif (lst[0][1] == "-X-" and lst[1][1] == "-X-" and lst[2][1] == "-X-") or (lst[0][1] == "-O-" and lst[1][1] == "-O-" and lst[2][1] == "-O-"):
         print(f"\nПобедитель {plyer}\n")
+        return False
     elif (lst[0][2] == "-X-" and lst[1][2] == "-X-" and lst[2][2] == "-X-") or (lst[0][2] == "-O-" and lst[1][2] == "-O-" and lst[2][2] == "-O-"):
         print(f"\nПобедитель {plyer}\n")
+        return False
 
     elif (lst[0][0] == "-X-" and lst[1][1] == "-X-" and lst[2][2] == "-X-") or (lst[0][0] == "-O-" and lst[1][1] == "-O-" and lst[2][2] == "-O-"):
         print(f"\nПобедитель {plyer}\n")
+        return False
     elif (lst[0][2] == "-X-" and lst[1][1] == "-X-" and lst[2][0] == "-X-") or (lst[0][2] == "-O-" and lst[1][1] == "-O-" and lst[2][0] == "-O-"):
         print(f"\nПобедитель {plyer}\n")
+        return False
     else:
         for i in range(len(lst)):
             for j in range(len(lst)):
