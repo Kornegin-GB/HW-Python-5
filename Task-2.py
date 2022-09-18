@@ -6,7 +6,7 @@ b) Подумайте как наделить бота "интеллектом"
 import os
 from random import randint
 
-number_candies = 202
+number_candies = 2021
 
 INSTRUCTIONS_PLYER = f"""
 На столе {number_candies} конфет
@@ -27,13 +27,14 @@ GAME_SETTINGS = """
 
 
 def Setting_game(number):
+    plyer = "Игрок 1"
     os.system('cls')
     if number == 1:
         print(INSTRUCTIONS_PLYER)
-        Game("Игрок 1", number_candies, number)
+        Game(plyer, number_candies, number)
     elif number == 2:
         print(INSTRUCTIONS_COMPUTER)
-        Game("Игрок 1", number_candies, number)
+        Game(plyer, number_candies, number)
     else:
         print("Сделайте корректный выбор \n")
         print(GAME_SETTINGS)
