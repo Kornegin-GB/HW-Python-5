@@ -9,13 +9,15 @@ from random import randint
 number_candies = 2021
 
 INSTRUCTIONS_PLYER = f"""
-На столе {number_candies} конфет
-Каждый игрок берет со стола конфеты от 1 до 28
+Игрок против игрока\n
+На столе {number_candies} конфета
+Каждый игрок по очереди берет со стола конфеты от 1 до 28
 Выигрывает тот кто последний заберет оставшиеся конфеты
 """
 
 INSTRUCTIONS_COMPUTER = f"""
-На столе {number_candies} конфет
+Игрок против компьютера\n
+На столе {number_candies} конфета
 Игрок берет со стола конфеты от 1 до 28
 Чтобы выиграть необходимо последним забрать все конфеты
 """
@@ -26,75 +28,102 @@ GAME_SETTINGS = """
 """
 
 
-def Setting_game(number):
-    plyer = "Игрок 1"
+def Clear():
     os.system('cls')
-    if number == 1:
-        print(INSTRUCTIONS_PLYER)
-        Game(plyer, number_candies, number)
-    elif number == 2:
-        print(INSTRUCTIONS_COMPUTER)
-        Game(plyer, number_candies, number)
-    else:
-        print("Сделайте корректный выбор \n")
-        print(GAME_SETTINGS)
-        Setting_game(int(input("Выберите рижим игры: ")))
 
 
-def Game(plyer, candies, game_mode):
+def Setting_game(game_run):
+    while game_run:
+        try:
+            number = int(input("Выберите рижим игры: "))
+            if number == 1:
+                return 1
+            elif number == 2:
+                return 2
+            else:
+                print("Вы ввели некоректное число")
+        except:
+            print("Вы ввели не число")
+
+
+def Game(candies, game_run):
+    game_mode = Setting_game(game_run)
+    Clear()
     if game_mode == 1:
-        if candies >= 28:
-            print(f'Ходит {plyer}')
-            print(f"Осталось {candies} конфет")
-            num = int(input("Введите число от 1 до 28: "))
-            print("")
-            if 28 >= num >= 1:
+        plyer = "Игрок 1"
+        Game_Plyer(plyer, candies, game_run)
+    elif game_mode == 2:
+        plyer = "Игрок"
+        Game_PC(plyer, candies, game_run)
+
+
+def Game_Plyer(plyer, candies, game_run):  # Игра между игроками
+    while game_run:
+        if candies > 28:
+            if plyer == "Игрок 1":
+                print(INSTRUCTIONS_PLYER)
+                print(f'Ходит {plyer}')
+                print(f"Осталось {candies} конфет")
+            elif plyer == "Игрок 2":
+                print(f'Ходит {plyer}')
+                print(f"Осталось {candies} конфет")
+            try:
+                num = int(input("Введите число от 1 до 28: "))
+                if 28 >= num >= 1:
+                    candies -= num
+                    if plyer == "Игрок 1":
+                        plyer = "Игрок 2"
+                    else:
+                        Clear()
+                        plyer = "Игрок 1"
+                else:
+                    print("Вы ввели число не удовлетворяющее условию")
+            except:
+                print("Вы ввели не число")
+        else:
+            print(f"Победитель {plyer}")
+            game_run = False
+    else:
+        print("Игра окончена")
+
+
+def Game_PC(plyer, candies, game_run):  # Игра с компьютером
+    while game_run:
+        if candies > 28:
+            if plyer == "Игрок":
+                print(INSTRUCTIONS_COMPUTER)
+                print(f'Ходит {plyer}')
+                print(f"Осталось {candies} конфет")
+            elif plyer == "Компьютер":
+                print(f'Ходит {plyer}')
+                print(f"Осталось {candies} конфет")
+            if plyer == "Игрок":
+                try:
+                    num = int(input("Введите число от 1 до 28: "))
+                    if 28 >= num >= 1:
+                        candies -= num
+                        plyer = "Компьютер"
+                    else:
+                        print("Вы ввели число неудовлетворяющее условию")
+                except:
+                    print("Вы ввели не число")
+            else:
+                Clear()
+                if candies >= 28:
+                    num = randint(1, 28)
+                else:
+                    num = candies
                 candies -= num
-                if plyer == "Игрок 1":
-                    plyer = "Игрок 2"
-                    Game(plyer, candies, game_mode)
-                elif plyer == "Игрок 2":
-                    plyer = "Игрок 1"
-                    Game(plyer, candies, game_mode)
-            else:
-                print("Введеное число не соответсвует правилам игры")
-                Game(plyer, candies, game_mode)
+                print(f"Компьютер ввел: {num}")
+                plyer = "Игрок"
         else:
-            print(f"Выиграл {plyer}")
+            print(f"Победитель {plyer}")
+            game_run = False
     else:
-        Game_PC(plyer, candies, game_mode)
+        print("Игра окончена")
 
 
-def Game_PC(plyer, candies, game_mode):
-    if candies >= 28:
-        print(f'Ходит {plyer}')
-        print(f"Осталось {candies} конфет")
-        if plyer == "Игрок 1":
-            num = int(input("Введите число от 1 до 28: "))
-            print("")
-        elif plyer == "Компьютер":
-            if candies <= 28:
-                num = candies
-            else:
-                num = int(randint(1, 28))
-            print(f"Введите число от 1 до 28: {num}")
-            print("")
-        if 28 >= num >= 1:
-            candies -= num
-        else:
-            print("Введеное число не соответсвует правилам игры")
-            Game_PC(plyer, candies, game_mode)
-        if plyer == "Игрок 1":
-            plyer = "Компьютер"
-            Game_PC(plyer, candies, game_mode)
-        elif plyer == "Компьютер":
-            plyer = "Игрок 1"
-            Game_PC(plyer, candies, game_mode)
-    else:
-        print(f"Выиграл {plyer}")
-
-
-os.system('cls')
-
+run = True
+Clear()
 print(GAME_SETTINGS)
-Setting_game(int(input("Выберите рижим игры: ")))
+Game(number_candies, run)
