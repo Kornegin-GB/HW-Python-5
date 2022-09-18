@@ -42,6 +42,12 @@ def write_file(path, text, coding):
         data.writelines(code_text)
 
 
+# Для записи начального файла
+text = "WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWBWWWWWWWWWWWWWW"
+with open("text.txt", "w") as data:
+    data.writelines(text)
+
+
 write_file("encode.txt", read_file("text.txt"), "encode")
 write_file("decode.txt", read_file("encode.txt"), "decode")
 
